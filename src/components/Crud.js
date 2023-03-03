@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Button } from "antd";
 import "antd/dist/antd.css";
 
 const Crud = () => {
@@ -37,11 +37,34 @@ const Crud = () => {
         })}
       </span>
     ));
-  console.log("dataColumns", dataColumns);
+
+  //   let table = document.querySelector(".custom_table");
+  //   table && table.setAttribute("id", "booksTable"); // table에 id부여
 
   return (
     <div>
-      <Table columns={columns} dataSource={myBooks} />
+      <Button>행추가</Button>
+      <Table
+        className="custom_table"
+        id="custom_table1"
+        columns={columns}
+        dataSource={myBooks}
+        bordered
+        pagination={false}
+        onRow={(record, index) => {
+          return {
+            onClick: (event) => {
+              let tableTr = event.target.parentElement;
+              tableTr && tableTr.classList.add("clicked_row");
+              if (tableTr.classList.value.includes("clicked_row")) {
+                console.log("체크체크");
+                tableTr.style.backgroundColor = "gray";
+              } else {
+              }
+            },
+          };
+        }}
+      />
     </div>
   );
 };
