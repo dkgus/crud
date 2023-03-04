@@ -10,25 +10,60 @@ const Crud = () => {
   const [data, setData] = useState([
     {
       id: "1",
-      Book_Name: "Computer Architecture",
+      bookName: "Computer Architecture",
       category: "Computers",
       price: 125.6,
     },
     {
       id: "2",
-      Book_Name: "Asp.Net 4 Blue Book",
+      bookName: "Asp.Net 4 Blue Book",
       category: "Programming",
       price: 56.0,
     },
     {
       id: "3",
-      Book_Name: "Popular Science",
+      bookName: "Popular Science",
       category: "Science",
       price: 210.4,
     },
   ]);
+  const [bookNameVal, setbookNameVal] = useState("");
+  const [price, setPrice] = useState(0);
+  const [tableIdx, setTableIdx] = useState();
   const copyData = [...data];
   const category = ["Business", "Computers", "Programming", "Science"];
+
+  useEffect(() => {
+    let emptyObj = {
+      id: "",
+      bookName: "",
+      category: "",
+      price: "",
+      inputCheck: "Y",
+    };
+    lastRow.push(...copyData, emptyObj);
+    setData(lastRow);
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("price", price);
+  //   console.log("bookNameVal", bookNameVal);
+  //   console.log("copyData", copyData);
+  //   console.log("tableIdx", tableIdx);
+  //   console.log("copyData[tableIdx]", copyData[tableIdx]);
+  //
+  // }, [price, bookNameVal, data, tableIdx]);
+
+  const onChange = (e, type) => {
+    if (type === "bookName") {
+      setbookNameVal(e.target.value);
+      copyData[tableIdx].bookName = e.target.value;
+    } else {
+      setPrice(e.target.value);
+      copyData[tableIdx].price = e.target.value;
+    }
+  };
+  console.log("lastCheck", copyData);
 
   const dataColumns =
     data &&
@@ -39,12 +74,19 @@ const Crud = () => {
           dataIndex: key,
           sorter: true,
           align: "center",
+          onCell: (record, rowIndex) => {
+            return {
+              onClick: (ev) => {
+                setTableIdx(rowIndex);
+              },
+            };
+          },
           render: (text, record, index) => {
-            if (!record.InputCheck && record.id !== "") {
+            if (!record.inputCheck && record.id !== "") {
               return text;
-            } else if (record.InputCheck === "Y" && key === "id") {
+            } else if (record.inputCheck === "Y" && key === "id") {
               return index + 1;
-            } else if (record.InputCheck === "Y" && key === "category") {
+            } else if (record.inputCheck === "Y" && key === "category") {
               return (
                 <Select style={{ width: "100%", borderRadius: 10 }}>
                   {category.map((item) => {
@@ -56,25 +98,24 @@ const Crud = () => {
                   })}
                 </Select>
               );
-            } else if (record.InputCheck === "Y" && key !== "id") {
-              return <Input />;
+            } else if (record.inputCheck === "Y" && key !== "id") {
+              if (key === "bookName") {
+                return (
+                  <Input
+                    onChange={(e) => onChange(e, "bookName")}
+                    value={bookNameVal}
+                  />
+                );
+              } else if (key === "price") {
+                return (
+                  <Input onChange={(e) => onChange(e, "price")} type="number" />
+                );
+              }
             }
           },
         })}
       </span>
     ));
-
-  useEffect(() => {
-    let emptyObj = {
-      id: "",
-      Book_Name: "",
-      category: "",
-      price: "",
-      InputCheck: "Y",
-    };
-    lastRow.push(...copyData, emptyObj);
-    setData(lastRow);
-  }, []);
 
   return (
     <div>
