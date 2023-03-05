@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Table, Select, Input } from "antd";
+import { Table, Select, Input, Button, message, Popconfirm } from "antd";
 import "antd/dist/antd.css";
 
 const Crud = () => {
   const { Option } = Select;
   const lastRow = [];
   const columns = [];
+  const deleteText = "해당 데이터를 삭제하시겠습니까?";
+  const description = "해당 데이터는 복구되지 않습니다.";
 
   const [data, setData] = useState([
     {
@@ -33,10 +35,9 @@ const Crud = () => {
   const [tableIdx, setTableIdx] = useState();
   const copyData = [...data];
   const category = ["Business", "Computers", "Programming", "Science"];
-
   useEffect(() => {
     let emptyObj = {
-      id: "",
+      id: String(copyData.length + 1),
       bookName: "",
       category: "",
       price: "",
@@ -52,7 +53,7 @@ const Crud = () => {
       copyData[tableIdx].bookName = e.target.value;
     } else if (type === "price") {
       setPrice(e.target.value);
-      copyData[tableIdx].price = e.target.value;
+      copyData[tableIdx].price = Number(e.target.value);
     } else {
       copyData[tableIdx].category = e;
     }
@@ -68,13 +69,33 @@ const Crud = () => {
       alert("저장에 필요한 데이터를 모두 입력해주세요.");
     } else {
       alert("데이터 저장에 성공했습니다.");
+
       setNextRow();
     }
   };
 
   const setNextRow = () => {
-    console.log("다음 줄 생성하기");
+    copyData.push({
+      id: String(copyData.length + 1),
+      bookName: "",
+      category: "",
+      price: "",
+      inputCheck: "Y",
+    });
+
+    setData(copyData);
   };
+  console.log("copyData", copyData);
+
+  const deleteFunc = (deleteKey) => {
+    // console.log("111", copyData[deleteKey]);
+    // if (copyData[deleteKey]) {
+    //   for (let i = 0; i < copyData.length; i++) {
+    //     copyData.splice(1, i);
+    //   }
+    // }
+  };
+
   const onFocus = () => {};
   const dataColumns =
     data &&
@@ -117,19 +138,29 @@ const Crud = () => {
               );
             } else if (record.inputCheck === "Y" && key !== "id") {
               if (key === "bookName") {
-                return (
-                  <Input
-                    onChange={(e) => onChange(e, "bookName")}
-                    value={bookNameVal}
-                  />
-                );
+                return <Input onChange={(e) => onChange(e, "bookName")} />;
               } else if (key === "price") {
                 return (
-                  <Input
-                    onChange={(e) => onChange(e, "price")}
-                    type="number"
-                    onPressEnter={pressEnter}
-                  />
+                  <>
+                    <Input
+                      onChange={(e) => onChange(e, "price")}
+                      type="number"
+                      onPressEnter={pressEnter}
+                      style={{ width: "80%" }}
+                    />
+                    <span style={{ paddingLeft: 10 }}>
+                      <Popconfirm
+                        placement="top"
+                        title={deleteText}
+                        description={description}
+                        onConfirm={deleteFunc(index)}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Button>X</Button>
+                      </Popconfirm>
+                    </span>
+                  </>
                 );
               }
             }
