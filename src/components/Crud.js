@@ -29,6 +29,7 @@ const Crud = () => {
   ]);
   const [bookNameVal, setbookNameVal] = useState("");
   const [price, setPrice] = useState(0);
+  const [type, setType] = useState("");
   const [tableIdx, setTableIdx] = useState();
   const copyData = [...data];
   const category = ["Business", "Computers", "Programming", "Science"];
@@ -45,26 +46,36 @@ const Crud = () => {
     setData(lastRow);
   }, []);
 
-  // useEffect(() => {
-  //   console.log("price", price);
-  //   console.log("bookNameVal", bookNameVal);
-  //   console.log("copyData", copyData);
-  //   console.log("tableIdx", tableIdx);
-  //   console.log("copyData[tableIdx]", copyData[tableIdx]);
-  //
-  // }, [price, bookNameVal, data, tableIdx]);
-
   const onChange = (e, type) => {
     if (type === "bookName") {
       setbookNameVal(e.target.value);
       copyData[tableIdx].bookName = e.target.value;
-    } else {
+    } else if (type === "price") {
       setPrice(e.target.value);
       copyData[tableIdx].price = e.target.value;
+    } else {
+      copyData[tableIdx].category = e;
+    }
+
+    setData(copyData);
+  };
+
+  const pressEnter = () => {
+    if (
+      copyData[tableIdx].category === "" ||
+      copyData[tableIdx].bookName === ""
+    ) {
+      alert("저장에 필요한 데이터를 모두 입력해주세요.");
+    } else {
+      alert("데이터 저장에 성공했습니다.");
+      setNextRow();
     }
   };
-  console.log("lastCheck", copyData);
 
+  const setNextRow = () => {
+    console.log("다음 줄 생성하기");
+  };
+  const onFocus = () => {};
   const dataColumns =
     data &&
     Object.keys(data[0])?.map((key) => (
@@ -88,7 +99,13 @@ const Crud = () => {
               return index + 1;
             } else if (record.inputCheck === "Y" && key === "category") {
               return (
-                <Select style={{ width: "100%", borderRadius: 10 }}>
+                <Select
+                  onFocus={onFocus}
+                  onChange={(e) => {
+                    onChange(e, "category");
+                  }}
+                  style={{ width: "100%", borderRadius: 10 }}
+                >
                   {category.map((item) => {
                     return (
                       <>
@@ -108,7 +125,11 @@ const Crud = () => {
                 );
               } else if (key === "price") {
                 return (
-                  <Input onChange={(e) => onChange(e, "price")} type="number" />
+                  <Input
+                    onChange={(e) => onChange(e, "price")}
+                    type="number"
+                    onPressEnter={pressEnter}
+                  />
                 );
               }
             }
@@ -132,11 +153,11 @@ const Crud = () => {
             onClick: (event) => {
               let tableTr = event.target.parentElement;
               tableTr && tableTr.classList.toggle("clicked_row");
-              if (tableTr.classList.contains("clicked_row")) {
-                tableTr.style.backgroundColor = "gray";
-              } else {
-                tableTr.style.backgroundColor = "#fff";
-              }
+              // if (tableTr.classList.contains("clicked_row")) {
+              //   tableTr.style.backgroundColor = "gray";
+              // } else {
+              //   tableTr.style.backgroundColor = "#fff";
+              // }
             },
           };
         }}
