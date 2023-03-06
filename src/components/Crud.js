@@ -31,8 +31,9 @@ const Crud = () => {
   ]);
   const [bookNameVal, setbookNameVal] = useState("");
   const [price, setPrice] = useState(0);
-  const [type, setType] = useState("");
+  const [type, setType] = useState();
   const [tableIdx, setTableIdx] = useState();
+  const [deleteList, setDeleteList] = useState([]);
   const copyData = [...data];
   const category = ["Business", "Computers", "Programming", "Science"];
   useEffect(() => {
@@ -46,6 +47,10 @@ const Crud = () => {
     lastRow.push(...copyData, emptyObj);
     setData(lastRow);
   }, []);
+
+  useEffect(() => {
+    console.log("deleteList", deleteList);
+  }, [deleteList]);
 
   const onChange = (e, type) => {
     if (type === "bookName") {
@@ -85,15 +90,11 @@ const Crud = () => {
 
     setData(copyData);
   };
-  console.log("copyData", copyData);
 
   const deleteFunc = (deleteKey) => {
-    // console.log("111", copyData[deleteKey]);
-    // if (copyData[deleteKey]) {
-    //   for (let i = 0; i < copyData.length; i++) {
-    //     copyData.splice(1, i);
-    //   }
-    // }
+    let deleteList = copyData.splice(deleteKey, 1);
+    setDeleteList((prevProducts) => [...prevProducts, ...deleteList]);
+    setData(copyData);
   };
 
   const onFocus = () => {};
@@ -126,6 +127,7 @@ const Crud = () => {
                     onChange(e, "category");
                   }}
                   style={{ width: "100%", borderRadius: 10 }}
+                  value={text}
                 >
                   {category.map((item) => {
                     return (
@@ -138,13 +140,20 @@ const Crud = () => {
               );
             } else if (record.inputCheck === "Y" && key !== "id") {
               if (key === "bookName") {
-                return <Input onChange={(e) => onChange(e, "bookName")} />;
+                return (
+                  <Input
+                    onChange={(e) => onChange(e, "bookName")}
+                    //value={bookNameVal[tableIdx]}
+                    value={text}
+                  />
+                );
               } else if (key === "price") {
                 return (
                   <>
                     <Input
                       onChange={(e) => onChange(e, "price")}
                       type="number"
+                      value={text}
                       onPressEnter={pressEnter}
                       style={{ width: "80%" }}
                     />
@@ -153,7 +162,7 @@ const Crud = () => {
                         placement="top"
                         title={deleteText}
                         description={description}
-                        onConfirm={deleteFunc(index)}
+                        onConfirm={() => deleteFunc(index)}
                         okText="Yes"
                         cancelText="No"
                       >
