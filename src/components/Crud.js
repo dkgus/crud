@@ -34,6 +34,7 @@ const Crud = () => {
   const [type, setType] = useState();
   const [tableIdx, setTableIdx] = useState();
   const [deleteList, setDeleteList] = useState([]);
+  const [checkSave, setCheckSave] = useState(false);
   const copyData = [...data];
   const category = ["Business", "Computers", "Programming", "Science"];
   useEffect(() => {
@@ -49,22 +50,40 @@ const Crud = () => {
   }, []);
 
   useEffect(() => {
+    console.log("checkSave", checkSave);
+    if (checkSave === true) {
+      let table = document.querySelectorAll(".custom_table");
+    } else {
+      console.log("save아님");
+    }
+  }, [checkSave, copyData]);
+
+  useEffect(() => {
     console.log("deleteList", deleteList);
   }, [deleteList]);
 
   const onChange = (e, type) => {
     if (type === "bookName") {
+      const regExp = /^[가-힣\s]+$/;
+      const ele = e.target;
+      if (regExp.test(ele.value)) {
+        ele.value = ele.value.replace(regExp, "");
+      }
+      if (!ele.value) {
+        alert("영어로 입력해주세요.");
+      }
       setbookNameVal(e.target.value);
       copyData[tableIdx].bookName = e.target.value;
     } else if (type === "price") {
       setPrice(e.target.value);
       copyData[tableIdx].price = Number(e.target.value);
-    } else {
+    } else if (type === "category") {
       copyData[tableIdx].category = e;
     }
 
     setData(copyData);
   };
+  console.log("data", data);
 
   const pressEnter = () => {
     if (
@@ -74,11 +93,25 @@ const Crud = () => {
       alert("저장에 필요한 데이터를 모두 입력해주세요.");
     } else {
       alert("데이터 저장에 성공했습니다.");
+      setCheckSave(true);
+      // const customTable = document.querySelectorAll(
+      //   ".custom_table .ant-table-tbody"
+      // )[0];
 
+      // const lastChild = customTable.lastChild;
+      // console.log("lastChild", lastChild);
       setNextRow();
     }
   };
 
+  const chkCharCode = (e) => {
+    console.log("eee", e.target);
+    const regExp = /[^0-9a-zA-Z]/g;
+    const ele = e.target;
+    if (regExp.test(ele.value)) {
+      ele.value = ele.value.replace(regExp, "");
+    }
+  };
   const setNextRow = () => {
     copyData.push({
       id: String(copyData.length + 1),
