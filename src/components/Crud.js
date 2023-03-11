@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Table, Select, Input, Button, message, Popconfirm } from "antd";
 import "antd/dist/antd.css";
 
@@ -8,7 +8,7 @@ const Crud = () => {
   const columns = [];
   const deleteText = "해당 데이터를 삭제하시겠습니까?";
   const description = "해당 데이터는 복구되지 않습니다.";
-
+  const tableRef = useRef();
   const [data, setData] = useState([
     {
       id: "1",
@@ -50,13 +50,32 @@ const Crud = () => {
   }, []);
 
   useEffect(() => {
-    console.log("checkSave", checkSave);
-    if (checkSave === true) {
-      let table = document.querySelectorAll(".custom_table");
-    } else {
-      console.log("save아님");
-    }
-  }, [checkSave, copyData]);
+    console.log("tableRef", tableRef);
+  }, [copyData]);
+
+  // useEffect(() => {
+  //   const getTable = document.getElementsByClassName("ant-table-tbody");
+  //   Array.from(getTable).forEach((item) => {
+  //     const childList = item.childNodes;
+
+  //     let lastRow = childList[childList.length - 1];
+  //     console.log("lastRow2", lastRow.childNodes[1]);
+  //     console.log("lastRow2", lastRow.children[1].children[0]);
+  //     let lastInput = lastRow.children[1].children[0];
+  //     lastInput.focus();
+  //   });
+  // }, [copyData]);
+  // useEffect(() => {
+  //   console.log("tableIdx", tableIdx);
+  //   setCheckSave(false);
+  //   if (checkSave === true) {
+  //     let table = document.querySelectorAll(".custom_input");
+  //     let lastChild = table[table.length - 1];
+  //     console.log("lastChild", lastChild);
+  //     lastChild.focus();
+  //   } else {
+  //   }
+  // }, [copyData, checkSave]);
 
   useEffect(() => {
     console.log("deleteList", deleteList);
@@ -64,7 +83,7 @@ const Crud = () => {
 
   const onChange = (e, type) => {
     if (type === "bookName") {
-      const regExp = /^[가-힣\s]+$/;
+      const regExp = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣\s]+$/;
       const ele = e.target;
       if (regExp.test(ele.value)) {
         ele.value = ele.value.replace(regExp, "");
@@ -86,6 +105,8 @@ const Crud = () => {
   console.log("data", data);
 
   const pressEnter = () => {
+    //setCheckSave(false);
+
     if (
       copyData[tableIdx].category === "" ||
       copyData[tableIdx].bookName === ""
@@ -93,25 +114,12 @@ const Crud = () => {
       alert("저장에 필요한 데이터를 모두 입력해주세요.");
     } else {
       alert("데이터 저장에 성공했습니다.");
-      setCheckSave(true);
-      // const customTable = document.querySelectorAll(
-      //   ".custom_table .ant-table-tbody"
-      // )[0];
 
-      // const lastChild = customTable.lastChild;
-      // console.log("lastChild", lastChild);
+      setCheckSave(true);
       setNextRow();
     }
   };
 
-  const chkCharCode = (e) => {
-    console.log("eee", e.target);
-    const regExp = /[^0-9a-zA-Z]/g;
-    const ele = e.target;
-    if (regExp.test(ele.value)) {
-      ele.value = ele.value.replace(regExp, "");
-    }
-  };
   const setNextRow = () => {
     copyData.push({
       id: String(copyData.length + 1),
@@ -176,7 +184,7 @@ const Crud = () => {
                 return (
                   <Input
                     onChange={(e) => onChange(e, "bookName")}
-                    //value={bookNameVal[tableIdx]}
+                    className="custom_input"
                     value={text}
                   />
                 );
@@ -221,6 +229,7 @@ const Crud = () => {
         style={{ width: "80%", margin: "0 auto", paddingTop: 30 }}
         bordered
         pagination={false}
+        ref={tableRef}
         onRow={(record, index) => {
           return {
             onClick: (event) => {
