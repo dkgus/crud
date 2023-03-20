@@ -59,32 +59,44 @@ const DynamicChildColumn = () => {
       ],
     },
   ]);
+  const [keyNames, setKeyNames] = useState([]);
   const newArr = [];
+  const newArr2 = [];
 
   useEffect(() => {
     console.log("laneData", laneData[0]);
-    laneData[0].lane_num_statistics.forEach((item) => {
+    laneData[0].lane_num_statistics.forEach((item, idxx) => {
       //데이터  1_volume형태로 가공하기
       let laneName = item.lane_num;
+
       item.data.map((elem) => {
-        newArr.push({
-          time: elem.unit_time,
-          [laneName + "_volume"]: `${elem.volume}`,
-        });
+        for (let i = 0; i < item.data.length; i++) {
+          if (item.data[i].unit_time === elem.unit_time) {
+            laneData[0].lane_num_statistics.splice(1);
+            newArr.push({
+              time: elem.unit_time,
+            });
+          }
+        }
         return newArr;
       });
-      //setLaneData2(newArr);
+      laneData[0].lane_num_statistics.forEach((item, idxx) => {
+        item.data.map((elem2) => {
+          for (let i = 0; i < newArr.length; i++) {
+            if (elem2.unit_time === newArr[i].time) {
+              newArr2.push({
+                time: newArr[i].time,
+                [`${laneName}_volume`]: elem2.volume,
+              });
+            } else {
+            }
+          }
+          return newArr2;
+        });
+      });
     });
-
-    // newArr.forEach((item) => {
-    //   console.log("item77", item);
-    //   let keyName = Object.keys(item);
-    //   console.log("one", keyName);
-    //   if (keyName === "time"&&item.time ===) {
-
-    //   }
-    // });
   }, [laneData]);
+  console.log("newArr2", newArr2);
 
   const columns = [
     {
