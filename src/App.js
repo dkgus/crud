@@ -1,8 +1,10 @@
 import "./App.css";
 // import Crud from "./components/Crud";
 // import DynamicColumn from "./components/DynamicColumn";
-//import DynamicChildColumn from "./components/DynamicChildColumn";
+import DynamicChildColumn from "./components/DynamicChildColumn";
 import SelectType from "./components/SelectType";
+import CustomColumn from "./components/CustomColumn";
+
 function App() {
   return (
     <div className="App">
@@ -10,9 +12,11 @@ function App() {
       DynamicColumn
       <DynamicColumn /> */}
       {/* DynamicChildColumn
-      <DynamicChildColumn /> */}
+      <DynamicChildColumn />
       SelectType
-      <SelectType />
+      <SelectType /> */}
+      CustomColumn
+      <CustomColumn />
     </div>
   );
 }

@@ -61,32 +61,30 @@ const DynamicChildColumn = () => {
   ]);
   const newArr = [];
 
-  laneData[0].lane_num_statistics.forEach((item, idx) => {
-    const lanemNum = item.lane_num;
-    item.data.map((elem) => {
-      if (idx === 0) {
+  laneData[0].lane_num_statistics.forEach((item, index) => {
+    const laneData = item.lane_num;
+    item.data.forEach((elem) => {
+      if (index === 0) {
         newArr.push({
           time: elem.unit_time,
-          [lanemNum + "_volume"]: elem.volume,
+          [laneData + "_volume"]: elem.volume,
         });
       } else {
         for (let i = 0; i < newArr.length; i++) {
-          console.log("newArdffr", newArr);
-          console.log("elem", elem);
           if (newArr[i].time === elem.unit_time) {
             newArr.splice(i, 1, {
               ...newArr[i],
-              [lanemNum + "_volume"]: elem.volume,
+              [laneData + "_volume"]: elem.volume,
               //newArr모든 값을 시간값만 빼고 기존 가공된 배열+ 새로운 차선값 입력
             });
             break;
           }
         }
       }
-
       return newArr;
     });
   });
+
   const columns = [
     {
       title: "단위시간",
