@@ -59,45 +59,34 @@ const DynamicChildColumn = () => {
       ],
     },
   ]);
-  const [keyNames, setKeyNames] = useState([]);
   const newArr = [];
-  const newArr2 = [];
 
-  useEffect(() => {
-    console.log("laneData", laneData[0]);
-    laneData[0].lane_num_statistics.forEach((item, idxx) => {
-      //데이터  1_volume형태로 가공하기
-      let laneName = item.lane_num;
-
-      item.data.map((elem) => {
-        for (let i = 0; i < item.data.length; i++) {
-          if (item.data[i].unit_time === elem.unit_time) {
-            laneData[0].lane_num_statistics.splice(1);
-            newArr.push({
-              time: elem.unit_time,
+  laneData[0].lane_num_statistics.forEach((item, idx) => {
+    const lanemNum = item.lane_num;
+    item.data.map((elem) => {
+      if (idx === 0) {
+        newArr.push({
+          time: elem.unit_time,
+          [lanemNum + "_volume"]: elem.volume,
+        });
+      } else {
+        for (let i = 0; i < newArr.length; i++) {
+          console.log("newArdffr", newArr);
+          console.log("elem", elem);
+          if (newArr[i].time === elem.unit_time) {
+            newArr.splice(i, 1, {
+              ...newArr[i],
+              [lanemNum + "_volume"]: elem.volume,
+              //newArr모든 값을 시간값만 빼고 기존 가공된 배열+ 새로운 차선값 입력
             });
+            break;
           }
         }
-        return newArr;
-      });
-      laneData[0].lane_num_statistics.forEach((item, idxx) => {
-        item.data.map((elem2) => {
-          for (let i = 0; i < newArr.length; i++) {
-            if (elem2.unit_time === newArr[i].time) {
-              newArr2.push({
-                time: newArr[i].time,
-                [`${laneName}_volume`]: elem2.volume,
-              });
-            } else {
-            }
-          }
-          return newArr2;
-        });
-      });
-    });
-  }, [laneData]);
-  console.log("newArr2", newArr2);
+      }
 
+      return newArr;
+    });
+  });
   const columns = [
     {
       title: "단위시간",
@@ -127,7 +116,7 @@ const DynamicChildColumn = () => {
       <Table
         columns={columns}
         style={{ width: "80%", margin: "0 auto" }}
-        data={newArr}
+        dataSource={newArr}
         bordered
       />
     </>
