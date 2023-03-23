@@ -4,6 +4,7 @@ import "./App.css";
 import DynamicChildColumn from "./components/DynamicChildColumn";
 import SelectType from "./components/SelectType";
 import CustomColumn from "./components/CustomColumn";
+import Quiz from "./components/Quiz";
 
 function App() {
   return (
@@ -15,8 +16,10 @@ function App() {
       <DynamicChildColumn />
       SelectType
       <SelectType /> */}
-      CustomColumn
-      <CustomColumn />
+      {/* CustomColumn
+      <CustomColumn /> */}
+      Quiz
+      <Quiz />
     </div>
   );
 }
