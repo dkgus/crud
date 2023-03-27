@@ -35,31 +35,53 @@ function Quiz() {
     },
   ];
   const [start, setStart] = useState(false);
-  const [answer, setAnswer] = useState("");
   const [count, setCount] = useState(1);
   const [answerSheet, setAnswerSheet] = useState([]);
+  const [counterChecker, setCounterChecker] = useState(0);
+  let counter = 0;
+  let arr = [];
 
-  useEffect(() => {}, [answer, count]);
+  useEffect(() => {
+    questions &&
+      questions.map((item) => {
+        arr.push({ ...item, seleted_answer: "" });
+      });
+    setAnswerSheet(arr);
+  }, []);
+
+  useEffect(() => {
+    console.log("counterChecker", counterChecker);
+  }, [answerSheet, counter]);
 
   const onClick = () => {
     setStart(true);
   };
 
-  const onChange = (e, rightAs) => {
-    let answerArr = [...answerSheet];
-    //답이 맞을 때에만 배열에 들어가게끔
-    if (e.target.value === rightAs) {
-      setAnswer(e.target.value);
-      answerArr.push(e.target.value);
+  const checkAnswer = (answerSheet) => {
+    answerSheet.forEach((elem) => {
+      if (elem.seleted_answer === elem.correctAnswer) {
+        counter++;
+      }
+      setCounterChecker(counter);
+    });
+  };
+  const onChange = (e, rightAs, key) => {
+    console.log("answerSheet", answerSheet);
+    if (e.target.checked) {
+      answerSheet[key].seleted_answer = e.target.value;
+    } else {
+      answerSheet[key].seleted_answer = "";
     }
-    setAnswerSheet(answerArr);
+    if (key === answerSheet.length - 1) {
+      checkAnswer(answerSheet);
+    }
   };
 
   const nextBtn = () => {
-    setCount(count + 1);
+    setCount((count) => count + 1);
   };
   const prevBtn = () => {
-    setCount(count - 1);
+    setCount((count) => count - 1);
   };
 
   return (
@@ -73,7 +95,7 @@ function Quiz() {
         {start ? (
           <>
             {questions &&
-              questions.map((item) => {
+              questions.map((item, idx) => {
                 if (item.order === count) {
                   return (
                     <>
@@ -83,7 +105,9 @@ function Quiz() {
                           {item.choices.map((elem) => (
                             <Radio
                               value={elem}
-                              onChange={(e) => onChange(e, item.correctAnswer)}
+                              onChange={(e) =>
+                                onChange(e, item.correctAnswer, idx)
+                              }
                             >
                               {elem}
                             </Radio>
@@ -98,11 +122,16 @@ function Quiz() {
               })}
             <div>
               {questions.length < count ? (
-                <>당신의 정답 개수는 {answerSheet.length}개 입니다 !</>
+                <>당신의 정답 개수는 {counterChecker}개 입니다 !</>
               ) : null}
 
               <div style={{ paddingTop: 30 }}>
-                <Button onClick={prevBtn} disabled={count < 1 ? true : false}>
+                <Button
+                  onClick={prevBtn}
+                  disabled={
+                    count < 1 || questions.length < count ? true : false
+                  }
+                >
                   prev
                 </Button>
                 <Button
