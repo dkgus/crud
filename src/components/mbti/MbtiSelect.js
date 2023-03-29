@@ -71,7 +71,7 @@ function MbtiSelect() {
       {counter === qnaList.length ? (
         <>
           <div>
-            <MbtiResult />
+            <MbtiResult answerSheet={answerSheet} />
           </div>
         </>
       ) : null}
