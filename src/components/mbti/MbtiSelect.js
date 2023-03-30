@@ -82,15 +82,22 @@ function MbtiSelect() {
                     style={{
                       backgroundColor: "#FFEEEE",
                       borderRadius: 3,
+                      margin: 10,
+                      padding: 48,
                     }}
                   >
                     {item.q}
                   </h3>
-                  <Radio.Group>
+                  <Radio.Group optionType="button" size="large">
                     {select.map((item) => {
                       return (
-                        <div style={{ display: "flex" }}>
+                        <div style={{ display: "grid" }}>
                           <Radio
+                            className="custom_radio"
+                            style={{
+                              margin: 10,
+                              borderRadius: 10,
+                            }}
                             value={item.answer}
                             onChange={(e) => onSelect(e, qnaList[idx], idx)}
                           >
