@@ -8,6 +8,7 @@ function MbtiSelect() {
   let select = [];
   const [counter, setCounter] = useState(0);
   const [answerSheet, setAnserSheet] = useState({});
+  const endPoint = qnaList.length;
 
   useEffect(() => {
     console.log("answerSheet", answerSheet);
@@ -50,21 +51,56 @@ function MbtiSelect() {
 
             return (
               <>
-                <div>{item.q}</div>
-                <Radio.Group>
-                  {select.map((item) => {
-                    return (
-                      <>
-                        <Radio
-                          value={item.answer}
-                          onChange={(e) => onSelect(e, qnaList[idx], idx)}
-                        >
-                          {item.answer}
-                        </Radio>
-                      </>
-                    );
-                  })}
-                </Radio.Group>
+                <div
+                  className="select_page_container"
+                  style={{
+                    background: "#F2D7D9",
+                    margin: "0 auto",
+                    width: "80%",
+                    height: "1000px",
+                  }}
+                >
+                  <div
+                    className="status_bar"
+                    style={{
+                      width: "100%",
+                      background: "#FFFFFF",
+                      height: 20,
+                      borderRadius: 10,
+                    }}
+                  >
+                    <div
+                      style={{
+                        background: "#D3CEDF",
+                        borderRadius: 10,
+                        height: 20,
+                        width: (100 / endPoint) * (counter + 1) + "%",
+                      }}
+                    ></div>
+                  </div>
+                  <h3
+                    style={{
+                      backgroundColor: "#FFEEEE",
+                      borderRadius: 3,
+                    }}
+                  >
+                    {item.q}
+                  </h3>
+                  <Radio.Group>
+                    {select.map((item) => {
+                      return (
+                        <div style={{ display: "flex" }}>
+                          <Radio
+                            value={item.answer}
+                            onChange={(e) => onSelect(e, qnaList[idx], idx)}
+                          >
+                            {item.answer}
+                          </Radio>
+                        </div>
+                      );
+                    })}
+                  </Radio.Group>
+                </div>
               </>
             );
           }
