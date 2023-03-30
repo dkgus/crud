@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { qnaList, pointArr } from "./mbtiData";
 import { Button, Radio } from "antd";
 import MbtiResult from "./MbtiResult";
+import { Link } from "react-router-dom";
 
 function MbtiSelect() {
   let select = [];
@@ -12,12 +13,6 @@ function MbtiSelect() {
     console.log("answerSheet", answerSheet);
   }, [answerSheet]);
 
-  const onNext = () => {
-    setCounter((num) => num + 1);
-  };
-  const onPrev = () => {
-    setCounter((num) => num - 1);
-  };
   const onSelect = (e, arr, idx) => {
     arr.a.forEach((item) => {
       if (item.answer === e.target.value) {
@@ -25,6 +20,10 @@ function MbtiSelect() {
           for (let i = 0; i < pointArr.length; i++) {
             if (pointArr[i].name === elem) {
               pointArr[i].value += 1;
+
+              setTimeout(() => {
+                setCounter(counter + 1);
+              }, 300);
             }
           }
         });
@@ -37,7 +36,9 @@ function MbtiSelect() {
     });
     setAnserSheet(maxObjArr.name);
   };
-
+  const onShare = () => {
+    console.log("공유");
+  };
   return (
     <>
       {qnaList &&
@@ -73,17 +74,12 @@ function MbtiSelect() {
           <div>
             <MbtiResult answerSheet={answerSheet} />
           </div>
+          <Button onClick={onShare}>공유하기</Button>
+          <Button>
+            <Link to="/crud">테스트 다시하기</Link>
+          </Button>
         </>
       ) : null}
-      <div>
-        <Button onClick={onPrev}>Prev</Button>
-        <Button
-          onClick={onNext}
-          disabled={counter === qnaList.length ? true : false}
-        >
-          Next
-        </Button>
-      </div>
     </>
   );
 }
