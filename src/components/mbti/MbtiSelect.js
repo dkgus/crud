@@ -144,18 +144,19 @@ function MbtiSelect() {
               <Link to="/crud">테스트 다시하기</Link>
             </Button>
             <Button
-              onClick={() => shareKakao(counter, "title")}
+              onClick={() => shareKakao()}
               style={{
                 fontFamily: "KCCChassam",
                 borderRadius: 10,
               }}
             >
+              <a id="kakaotalk-sharing-btn"> 공유하기 </a>
+
               <img
                 src={`${process.env.PUBLIC_URL}/asset/KakaoLogo2.png`}
                 alt={"Kakao Logo"}
                 style={{ width: 30, paddingRight: 10 }}
               />
-              공유하기
             </Button>
           </div>
         </>
