@@ -3,6 +3,7 @@ import { qnaList, pointArr } from "./mbtiData";
 import { Button, Radio } from "antd";
 import MbtiResult from "./MbtiResult";
 import { Link } from "react-router-dom";
+import "./style.css";
 
 function MbtiSelect() {
   let select = [];
@@ -22,9 +23,13 @@ function MbtiSelect() {
             if (pointArr[i].name === elem) {
               pointArr[i].value += 1;
 
+              console.log("counter", counter);
+              console.log("endPoint", endPoint);
+              // if (counter < endPoint - 1) {
               setTimeout(() => {
                 setCounter(counter + 1);
               }, 300);
+              // }
             }
           }
         });
@@ -57,7 +62,7 @@ function MbtiSelect() {
                     background: "#F2D7D9",
                     margin: "0 auto",
                     width: "80%",
-                    height: "1000px",
+                    height: "800px",
                   }}
                 >
                   <div
@@ -84,25 +89,29 @@ function MbtiSelect() {
                       borderRadius: 3,
                       margin: 10,
                       padding: 48,
+                      fontFamily: "KCCChassam",
                     }}
                   >
                     {item.q}
                   </h3>
-                  <Radio.Group optionType="button" size="large">
+
+                  <Radio.Group size="large">
                     {select.map((item) => {
                       return (
                         <div style={{ display: "grid" }}>
-                          <Radio
+                          <Radio.Button
                             className="custom_radio"
                             style={{
                               margin: 10,
                               borderRadius: 10,
+                              padding: 29,
+                              fontFamily: "KCCChassam",
                             }}
                             value={item.answer}
                             onChange={(e) => onSelect(e, qnaList[idx], idx)}
                           >
                             {item.answer}
-                          </Radio>
+                          </Radio.Button>
                         </div>
                       );
                     })}
@@ -115,12 +124,36 @@ function MbtiSelect() {
       {counter === qnaList.length ? (
         <>
           <div>
+            {/* <Link to={`/crud/result/${answerSheet}`}> */}
             <MbtiResult answerSheet={answerSheet} />
+            {/* </Link> */}
           </div>
-          <Button onClick={onShare}>공유하기</Button>
-          <Button>
-            <Link to="/crud">테스트 다시하기</Link>
-          </Button>
+          <div
+            style={{
+              background: "#F2D7D9",
+              margin: "0 auto",
+              width: "80%",
+            }}
+          >
+            <Button
+              style={{
+                fontFamily: "KCCChassam",
+                borderRadius: 10,
+                marginRight: 15,
+              }}
+            >
+              <Link to="/crud">테스트 다시하기</Link>
+            </Button>
+            <Button
+              onClick={onShare}
+              style={{
+                fontFamily: "KCCChassam",
+                borderRadius: 10,
+              }}
+            >
+              공유하기
+            </Button>
+          </div>
         </>
       ) : null}
     </>

@@ -1,0 +1,34 @@
+*,
+*::before,
+*::after {
+  box-sizing: content-box;
+}
+
+.ant-radio-button-wrapper:hover {
+  color: #8d7b68;
+  font-weight: bold;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  border-color: white;
+}
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  color: #8d7b68;
+}
+
+.ant-radio-button-wrapper-checked:not(
+    [class*=" ant-radio-button-wrapper-disabled"]
+  ).ant-radio-button-wrapper:first-child {
+  border-color: #fff;
+}
+
+@font-face {
+  font-family: "KCCChassam";
+  src: url("../../font/KCCChassam.woff2") format("woff2"),
+    url("../../font/KCCChassam.woff") format("woff"),
+    url("../../font/KCC-Chassam.otf") format("off"),
+    url("../../font/KCC-Chassam.ttf") format("ttf");
+
+  /* font-weight: normal;
+  font-style: normal; */
+}
