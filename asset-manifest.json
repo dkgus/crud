@@ -1,15 +1,35 @@
 {
   "files": {
-    "main.css": "/crud/static/css/main.73c21f6a.css",
-    "main.js": "/crud/static/js/main.3c04d1c9.js",
+    "main.css": "/crud/static/css/main.d0d64389.css",
+    "main.js": "/crud/static/js/main.22a58248.js",
     "static/js/787.ad4f4dcc.chunk.js": "/crud/static/js/787.ad4f4dcc.chunk.js",
+    "static/media/KCC-Chassam.ttf": "/crud/static/media/KCC-Chassam.cee84c56020871dac0e1.ttf",
+    "static/media/travel(4).png": "/crud/static/media/travel(4).04e0576eb1a667a7c75e.png",
+    "static/media/travel(1).png": "/crud/static/media/travel(1).0e9392f8d89a7b7ad63f.png",
+    "static/media/travel(14).png": "/crud/static/media/travel(14).7135792b62c2fee583ae.png",
+    "static/media/travel(3).png": "/crud/static/media/travel(3).0108de2cdb5cec6c9b12.png",
+    "static/media/travel(9).png": "/crud/static/media/travel(9).0fcaa0f3f4ebc0fc1c27.png",
+    "static/media/travel(7).png": "/crud/static/media/travel(7).85dc4e461e584be2286b.png",
+    "static/media/KCC-Chassam.otf": "/crud/static/media/KCC-Chassam.1eb3c28e5c6bf779d5e1.otf",
+    "static/media/travel(13).png": "/crud/static/media/travel(13).c5613685362a7cf2c88b.png",
+    "static/media/travel(0).png": "/crud/static/media/travel(0).f048ac1c5f30f0470f35.png",
+    "static/media/travel(12).png": "/crud/static/media/travel(12).a1e7cde9897139ecdb68.png",
+    "static/media/KCCChassam.woff": "/crud/static/media/KCCChassam.43ebe845dbc95a44e67f.woff",
+    "static/media/travel(2).png": "/crud/static/media/travel(2).a235e600d5034b21af3c.png",
+    "static/media/travel(11).png": "/crud/static/media/travel(11).748a5ed1eb59e438ef90.png",
+    "static/media/travel(5).png": "/crud/static/media/travel(5).1d2f6f24b2c03b361a59.png",
+    "static/media/travel(10).png": "/crud/static/media/travel(10).2b5519824ad8da95fb01.png",
+    "static/media/travel(6).png": "/crud/static/media/travel(6).29a93cb03beac96c8b71.png",
+    "static/media/travel(8).png": "/crud/static/media/travel(8).f166ebff3a0f1cc181f5.png",
+    "static/media/KCCChassam.woff2": "/crud/static/media/KCCChassam.2b9222bd955284981944.woff2",
+    "static/media/Coffe call.png": "/crud/static/media/Coffe call.3e30e5425cd9902f4279.png",
     "index.html": "/crud/index.html",
-    "main.73c21f6a.css.map": "/crud/static/css/main.73c21f6a.css.map",
-    "main.3c04d1c9.js.map": "/crud/static/js/main.3c04d1c9.js.map",
+    "main.d0d64389.css.map": "/crud/static/css/main.d0d64389.css.map",
+    "main.22a58248.js.map": "/crud/static/js/main.22a58248.js.map",
     "787.ad4f4dcc.chunk.js.map": "/crud/static/js/787.ad4f4dcc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.73c21f6a.css",
-    "static/js/main.3c04d1c9.js"
+    "static/css/main.d0d64389.css",
+    "static/js/main.22a58248.js"
   ]
 }
