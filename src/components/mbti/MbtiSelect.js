@@ -106,6 +106,7 @@ function MbtiSelect() {
                               borderRadius: 10,
                               padding: 29,
                               fontFamily: "KCCChassam",
+                              height: 79,
                             }}
                             value={item.answer}
                             onChange={(e) => onSelect(e, qnaList[idx], idx)}
@@ -124,15 +125,14 @@ function MbtiSelect() {
       {counter === qnaList.length ? (
         <>
           <div>
-            {/* <Link to={`/crud/result/${answerSheet}`}> */}
             <MbtiResult answerSheet={answerSheet} />
-            {/* </Link> */}
           </div>
           <div
             style={{
               background: "#F2D7D9",
               margin: "0 auto",
               width: "80%",
+              height: 68,
             }}
           >
             <Button

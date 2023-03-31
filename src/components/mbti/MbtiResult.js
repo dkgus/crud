@@ -31,19 +31,23 @@ function MbtiResult(props) {
                     background: "#F2D7D9",
                     margin: "0 auto",
                     width: "80%",
-                    height: "800px",
+                    height: "650px",
                     fontFamily: "KCCChassam",
                   }}
                 >
                   <div>{item.name}</div>
                   <div>
                     <img
-                      style={{ width: "350px", height: "400px" }}
+                      style={{
+                        width: "317px",
+                        height: "386px",
+                        borderRadius: 10,
+                      }}
                       src={require(`./travelImg/travel(${imgNum}).png`)}
                       alt={imgNum}
                     ></img>
                   </div>
-                  <div style={{ margin: 30 }}>{item.desc}</div>
+                  <div style={{ margin: "0 30px" }}>{item.desc}</div>
                 </div>
               </>
             );
