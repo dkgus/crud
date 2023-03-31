@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import MbtiMain from "./MbtiMain";
 import MbtiSelect from "./MbtiSelect";
 //import MbtiResult from "./MbtiResult";
@@ -7,13 +7,15 @@ import MbtiSelect from "./MbtiSelect";
 function MbtiTest() {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
+          <Route path="/" element={<MbtiMain />} />
+          <Route path="/*" element={<MbtiMain />} />
           <Route path="/crud" element={<MbtiMain />} />
           <Route path="/crud/select" element={<MbtiSelect />} />
           {/* <Route path="/crud/select/:id" element={<MbtiResult />} /> */}
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }

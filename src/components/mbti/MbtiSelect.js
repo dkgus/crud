@@ -4,6 +4,7 @@ import { Button, Radio } from "antd";
 import MbtiResult from "./MbtiResult";
 import { Link } from "react-router-dom";
 import "./style.css";
+import { shareKakao } from "../../utils/shareKakaoLink";
 
 function MbtiSelect() {
   let select = [];
@@ -14,6 +15,14 @@ function MbtiSelect() {
   useEffect(() => {
     console.log("answerSheet", answerSheet);
   }, [answerSheet]);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
 
   const onSelect = (e, arr, idx) => {
     arr.a.forEach((item) => {
@@ -42,9 +51,7 @@ function MbtiSelect() {
     });
     setAnserSheet(maxObjArr.name);
   };
-  const onShare = () => {
-    console.log("공유");
-  };
+
   return (
     <>
       {qnaList &&
@@ -145,13 +152,17 @@ function MbtiSelect() {
               <Link to="/crud">테스트 다시하기</Link>
             </Button>
             <Button
-              onClick={onShare}
+              onClick={() => shareKakao(counter, "title")}
               style={{
                 fontFamily: "KCCChassam",
                 borderRadius: 10,
               }}
             >
-              공유하기
+              <img
+                className="w-12 h-12"
+                src={`${process.env.PUBLIC_URL}/assets/KakaoLogo.png`}
+                alt={"Kakao Logo"}
+              />
             </Button>
           </div>
         </>
