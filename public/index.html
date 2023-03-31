@@ -40,5 +40,13 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      Kakao.init("586319c3b15435c5ee53d0f823bf910d");
+      Kakao.isInitialized();
+      if (!Kakao.isInitialized()) {
+        Kakao.init("[APP_ID]");
+      }
+      console.log(Kakao.isInitialized());
+    </script>
   </body>
 </html>

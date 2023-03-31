@@ -16,14 +16,6 @@ function MbtiSelect() {
     console.log("answerSheet", answerSheet);
   }, [answerSheet]);
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://developers.kakao.com/sdk/js/kakao.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => document.body.removeChild(script);
-  }, []);
-
   const onSelect = (e, arr, idx) => {
     arr.a.forEach((item) => {
       if (item.answer === e.target.value) {
@@ -159,10 +151,11 @@ function MbtiSelect() {
               }}
             >
               <img
-                className="w-12 h-12"
-                src={`${process.env.PUBLIC_URL}/assets/KakaoLogo.png`}
+                src={`${process.env.PUBLIC_URL}/asset/KakaoLogo2.png`}
                 alt={"Kakao Logo"}
+                style={{ width: 30, paddingRight: 10 }}
               />
+              공유하기
             </Button>
           </div>
         </>

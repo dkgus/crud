@@ -12,9 +12,9 @@
 .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
   border-color: white;
 }
-.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+/* .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
   color: #8d7b68;
-}
+} */
 
 .ant-radio-button-wrapper-checked:not(
     [class*=" ant-radio-button-wrapper-disabled"]
