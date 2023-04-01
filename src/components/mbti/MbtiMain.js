@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import "./style.css";
-import mainImg from "./travelImg/Coffe call.png";
 function MbtiMain() {
   return (
     <div
@@ -15,12 +14,12 @@ function MbtiMain() {
       }}
     >
       <img
-        src={mainImg}
+        src={`${process.env.PUBLIC_URL}/asset/travelImg/Coffe call.png`}
         alt=""
         style={{ width: "350px", height: "400px", paddingTop: 100 }}
       ></img>
       <br />
-      <h2>찰떡 여행지 MBTI</h2>
+      <h2>찰떡 여행 MBTI</h2>
       <br />
       <Button
         size="large"

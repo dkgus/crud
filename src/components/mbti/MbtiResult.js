@@ -43,7 +43,7 @@ function MbtiResult(props) {
                         height: "386px",
                         borderRadius: 10,
                       }}
-                      src={require(`./travelImg/travel(${imgNum}).png`)}
+                      src={`${process.env.PUBLIC_URL}/asset/travelImg/travel(${imgNum}).png`}
                       alt={imgNum}
                     ></img>
                   </div>
