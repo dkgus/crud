@@ -53,7 +53,9 @@
     ></script>
 
     <script>
+      //Kakao.init(process.env.REACT_APP_KAKAO_API_KEY);
       Kakao.init("586319c3b15435c5ee53d0f823bf910d");
+
       Kakao.isInitialized();
       if (!Kakao.isInitialized()) {
         Kakao.init("[APP_ID]");

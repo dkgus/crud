@@ -26,7 +26,7 @@ function MbtiSelect(props) {
         item.type.forEach((elem) => {
           for (let i = 0; i < pointArr.length; i++) {
             if (pointArr[i].name === elem) {
-              //pointArr[i].value += 1;
+              pointArr[i].value += 1;
 
               if (pageCounter < endPoint - 1) {
                 setTimeout(() => {

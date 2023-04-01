@@ -48,6 +48,7 @@ function MbtiResult(props) {
                       }}
                       src={`${process.env.PUBLIC_URL}/asset/travelImg/travel(${imgNum}).png`}
                       alt={imgNum}
+                      className="resultImg"
                     ></img>
                   </div>
                   <div style={{ margin: "0 30px" }}>{item.desc}</div>
@@ -68,10 +69,10 @@ function MbtiResult(props) {
                       background: "#D3CEDF",
                     }}
                   >
-                    <Link to="/crud">테스트 다시하기</Link>
+                    <Link to="/">테스트 다시하기</Link>
                   </Button>
                   <Button
-                    onClick={() => shareKakao()}
+                    onClick={() => shareKakao(infoList, answerSheet)}
                     id="kakaotalk-sharing-btn"
                     style={{
                       fontFamily: "KCCChassam",
