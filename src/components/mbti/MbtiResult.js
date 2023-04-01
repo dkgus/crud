@@ -1,6 +1,9 @@
 import React from "react";
 import { infoList } from "./mbtiData";
 import "./style.css";
+import { Button } from "antd";
+import { shareKakao } from "../../utils/shareKakaoLink";
+import { Link } from "react-router-dom";
 
 function MbtiResult(props) {
   const { answerSheet } = props;
@@ -48,6 +51,40 @@ function MbtiResult(props) {
                     ></img>
                   </div>
                   <div style={{ margin: "0 30px" }}>{item.desc}</div>
+                </div>
+                <div
+                  style={{
+                    background: "#F2D7D9",
+                    margin: "0 auto",
+                    width: "80%",
+                    height: 68,
+                  }}
+                >
+                  <Button
+                    style={{
+                      fontFamily: "KCCChassam",
+                      borderRadius: 10,
+                      marginRight: 15,
+                      background: "#D3CEDF",
+                    }}
+                  >
+                    <Link to="/crud">테스트 다시하기</Link>
+                  </Button>
+                  <Button
+                    onClick={() => shareKakao()}
+                    id="kakaotalk-sharing-btn"
+                    style={{
+                      fontFamily: "KCCChassam",
+                      borderRadius: 10,
+                    }}
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/asset/KakaoLogo2.png`}
+                      alt={"Kakao Logo"}
+                      style={{ width: 30, paddingRight: 10 }}
+                    />
+                    공유하기
+                  </Button>
                 </div>
               </>
             );

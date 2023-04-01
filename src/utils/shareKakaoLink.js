@@ -12,7 +12,8 @@ export const shareKakao = () => {
       content: {
         title: "찰떡 MBTI",
         description: "나에게 가장 잘 맞는 여행지를 찾아보세요!",
-        imageUrl: `${process.env.PUBLIC_URL}/asset/travelImg/Coffe call.png`,
+        imageUrl:
+          "https://github.com/dkgus/crud/blob/master/public/asset/travelImg/Coffe%20call.png??raw=true",
         link: {
           // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
           mobileWebUrl: "https://developers.kakao.com",

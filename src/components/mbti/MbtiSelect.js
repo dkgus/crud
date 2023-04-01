@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { qnaList, pointArr } from "./mbtiData";
 import { Button, Radio } from "antd";
-import MbtiResult from "./MbtiResult";
 import { Link } from "react-router-dom";
 import "./style.css";
-import { shareKakao } from "../../utils/shareKakaoLink";
 
-function MbtiSelect() {
+function MbtiSelect(props) {
   let select = [];
-  const [counter, setCounter] = useState(0);
-  const [answerSheet, setAnserSheet] = useState({});
+  const { answerSheet, setAnserSheet } = props;
+  const [pageCounter, setPageCounter] = useState(0);
+  const [isLast, setLast] = useState(false);
+
   const endPoint = qnaList.length;
 
   useEffect(() => {
     console.log("answerSheet", answerSheet);
   }, [answerSheet]);
+  useEffect(() => {
+    console.log("pageCounter", pageCounter);
+    console.log("endPoint", endPoint);
+  }, [pageCounter, endPoint]);
 
   const onSelect = (e, arr, idx) => {
     arr.a.forEach((item) => {
@@ -22,15 +26,15 @@ function MbtiSelect() {
         item.type.forEach((elem) => {
           for (let i = 0; i < pointArr.length; i++) {
             if (pointArr[i].name === elem) {
-              pointArr[i].value += 1;
+              //pointArr[i].value += 1;
 
-              console.log("counter", counter);
-              console.log("endPoint", endPoint);
-              // if (counter < endPoint - 1) {
-              setTimeout(() => {
-                setCounter(counter + 1);
-              }, 300);
-              // }
+              if (pageCounter < endPoint - 1) {
+                setTimeout(() => {
+                  setPageCounter(pageCounter + 1);
+                }, 300);
+              } else {
+                setLast(true);
+              }
             }
           }
         });
@@ -48,7 +52,7 @@ function MbtiSelect() {
     <>
       {qnaList &&
         qnaList.map((item, idx) => {
-          if (idx === counter) {
+          if (idx === pageCounter) {
             item.a.map((data) => {
               select.push({ answer: data.answer });
             });
@@ -78,7 +82,7 @@ function MbtiSelect() {
                         background: "#D3CEDF",
                         borderRadius: 10,
                         height: 20,
-                        width: (100 / endPoint) * (counter + 1) + "%",
+                        width: (100 / endPoint) * (pageCounter + 1) + "%",
                       }}
                     ></div>
                   </div>
@@ -116,51 +120,29 @@ function MbtiSelect() {
                       );
                     })}
                   </Radio.Group>
+                  {isLast ? (
+                    <>
+                      <div>
+                        <Button
+                          style={{
+                            color: "black",
+                            borderRadius: 10,
+                            background: "#D3CEDF",
+                            fontFamily: "KCCChassam",
+                          }}
+                        >
+                          <Link to={`/crud/select/${answerSheet}`}>
+                            결과보기
+                          </Link>
+                        </Button>
+                      </div>
+                    </>
+                  ) : null}
                 </div>
               </>
             );
           }
         })}
-      {counter === qnaList.length ? (
-        <>
-          <div>
-            <MbtiResult answerSheet={answerSheet} />
-          </div>
-          <div
-            style={{
-              background: "#F2D7D9",
-              margin: "0 auto",
-              width: "80%",
-              height: 68,
-            }}
-          >
-            <Button
-              style={{
-                fontFamily: "KCCChassam",
-                borderRadius: 10,
-                marginRight: 15,
-              }}
-            >
-              <Link to="/crud">테스트 다시하기</Link>
-            </Button>
-            <Button
-              onClick={() => shareKakao()}
-              style={{
-                fontFamily: "KCCChassam",
-                borderRadius: 10,
-              }}
-            >
-              <a id="kakaotalk-sharing-btn"> 공유하기 </a>
-
-              <img
-                src={`${process.env.PUBLIC_URL}/asset/KakaoLogo2.png`}
-                alt={"Kakao Logo"}
-                style={{ width: 30, paddingRight: 10 }}
-              />
-            </Button>
-          </div>
-        </>
-      ) : null}
     </>
   );
 }
