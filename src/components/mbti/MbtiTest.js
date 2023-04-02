@@ -9,13 +9,14 @@ function MbtiTest() {
 
   return (
     <>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MbtiMain />} />
-          <Route path="/*" element={<MbtiMain />} />
-          <Route path="/crud" element={<MbtiMain />} />
+          {/* <Route path="/" element={<MbtiMain />} />
+          <Route path="/*" element={<MbtiMain />} /> */}
+          <Route path="/" exact element={<MbtiMain />} />
           <Route
             path="/crud/select"
+            exact
             element={
               <MbtiSelect
                 answerSheet={answerSheet}
@@ -24,11 +25,11 @@ function MbtiTest() {
             }
           />
           <Route
-            path="/crud/select/:type"
+            path="/crud/select/:id"
             element={<MbtiResult answerSheet={answerSheet} />}
           />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </>
   );
 }

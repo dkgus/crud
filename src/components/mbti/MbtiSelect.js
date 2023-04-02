@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { qnaList, pointArr } from "./mbtiData";
 import { Button, Radio } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./style.css";
 
 function MbtiSelect(props) {
@@ -11,6 +11,31 @@ function MbtiSelect(props) {
   const [isLast, setLast] = useState(false);
 
   const endPoint = qnaList.length;
+  const location = useLocation();
+
+  const countryType = {
+    한국: 0,
+    "영국 런던": "1",
+    "미국 뉴욕": 2,
+    "캐나다 나이아가라 폭포": 3,
+    "프랑스 파리": 4,
+    시드니: 5,
+    이스탄불: 6,
+    "탄자니아 세렝게티": 7,
+    북극: 8,
+    보라카이: 9,
+    "중국 만리장성": 10,
+    싱가폴: 11,
+    "이집트 사막": 12,
+    "미국 아이오와": 13,
+    스위스: 13,
+  };
+  let countryNum = answerSheet && countryType[answerSheet];
+  console.log("countryNum", countryNum);
+
+  useEffect(() => {
+    console.log("locationSelect ", location);
+  }, [location]);
 
   useEffect(() => {
     console.log("answerSheet", answerSheet);
@@ -131,7 +156,7 @@ function MbtiSelect(props) {
                             fontFamily: "KCCChassam",
                           }}
                         >
-                          <Link to={`/crud/select/${answerSheet}`}>
+                          <Link to={`/crud/select/${countryNum}`}>
                             결과보기
                           </Link>
                         </Button>

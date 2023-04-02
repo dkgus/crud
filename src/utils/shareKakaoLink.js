@@ -1,11 +1,11 @@
-export const shareKakao = (infoList, answerSheet) => {
+export const shareKakao = (infoList, countryNum) => {
   let resultImg = document.querySelector(".resultImg");
   let resultAlt = resultImg.alt;
   const shareTitle = "<찰떡 여행 MBTI> 나에게 꼭 맞는 여행지를 찾아보세요!";
   const shareDes = infoList[resultAlt].name;
   const pageUrl = "https://exquisite-jelly-0e58c1.netlify.app/";
   const shareImg = pageUrl + `asset/travelImg/travel(${resultAlt}).png`;
-  const shareUrl = pageUrl + "crud/select/" + answerSheet;
+  const shareUrl = pageUrl + "crud/select/" + countryNum;
 
   // url이 id값에 따라 변경되기 때문에 route를 인자값으로 받아줌
   if (window.Kakao) {

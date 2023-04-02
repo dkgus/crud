@@ -6,6 +6,7 @@ import SelectType from "./components/SelectType";
 import CustomColumn from "./components/CustomColumn";
 import Quiz from "./components/Quiz";
 import MbtiTest from "./components/mbti/MbtiTest";
+import { Helmet } from "react-helmet-async";
 
 function App() {
   return (
