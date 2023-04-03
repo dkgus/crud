@@ -7,12 +7,11 @@ export const shareKakao = (infoList, countryNum) => {
   const shareImg = pageUrl + `asset/travelImg/travel(${resultAlt}).png`;
   const shareUrl = pageUrl + "crud/select/" + countryNum;
 
-  // url이 id값에 따라 변경되기 때문에 route를 인자값으로 받아줌
   if (window.Kakao) {
     const kakao = window.Kakao;
     if (!kakao.isInitialized()) {
-      //kakao.init(`${process.env.REACT_APP_KAKAO_APP_KEY}`);
-      kakao.init("586319c3b15435c5ee53d0f823bf910d");
+      kakao.init(process.env.REACT_APP_KAKAO_KEY);
+      //kakao.init("586319c3b15435c5ee53d0f823bf910d");
     }
 
     kakao.Share.createDefaultButton({
@@ -23,7 +22,6 @@ export const shareKakao = (infoList, countryNum) => {
         description: shareDes,
         imageUrl: shareImg,
         link: {
-          // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
           mobileWebUrl: shareUrl,
           webUrl: shareUrl,
         },

@@ -14,7 +14,7 @@ function MbtiSelect(props) {
   const location = useLocation();
 
   const countryType = {
-    한국: 0,
+    태국: 0,
     "영국 런던": "1",
     "미국 뉴욕": 2,
     "캐나다 나이아가라 폭포": 3,
@@ -24,10 +24,10 @@ function MbtiSelect(props) {
     "탄자니아 세렝게티": 7,
     북극: 8,
     보라카이: 9,
-    "중국 만리장성": 10,
+    중국: 10,
     싱가폴: 11,
     "이집트 사막": 12,
-    "미국 아이오와": 13,
+    "미국 캘리포니아": 13,
     스위스: 13,
   };
   let countryNum = answerSheet && countryType[answerSheet];

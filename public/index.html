@@ -5,6 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <meta name="author" content="dkgus12dkgus" />
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -12,12 +13,17 @@
 
     <meta
       property="og:image"
-      content="https://exquisite-jelly-0e58c1.netlify.app/asset/travelImg/Coffe%20call.png"
+      content="https://github.com/dkgus/crud/blob/master/public/asset/travelImg/banner.png?raw=true"
     />
     <meta property="og:site_name" content="사이트 이름을 작성해주세요" />
     <meta property="og:description" content="찰떡 여행지를 만나보세요!" />
 
-    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
+    <link rel="shortcut icon" href="%PUBLIC_URL%/asset/favicon.ico" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/asset/favicon.ico" />
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="%PUBLIC_URL%/asset/favicon.ico"
+    />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -56,12 +62,12 @@
     ></script>
 
     <script>
-      //Kakao.init(process.env.REACT_APP_KAKAO_API_KEY);
-      Kakao.init("586319c3b15435c5ee53d0f823bf910d");
+      Kakao.init(process.env.REACT_APP_KAKAO_KEY);
+      //Kakao.init("586319c3b15435c5ee53d0f823bf910d");
 
       Kakao.isInitialized();
       if (!Kakao.isInitialized()) {
-        Kakao.init("[APP_ID]");
+        Kakao.init(process.env.REACT_APP_KAKAO_KEY);
       }
       console.log(Kakao.isInitialized());
     </script>

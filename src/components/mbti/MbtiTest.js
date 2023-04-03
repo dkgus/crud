@@ -11,8 +11,6 @@ function MbtiTest() {
     <>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<MbtiMain />} />
-          <Route path="/*" element={<MbtiMain />} /> */}
           <Route path="/" exact element={<MbtiMain />} />
           <Route
             path="/crud/select"
