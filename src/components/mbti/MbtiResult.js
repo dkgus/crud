@@ -121,6 +121,18 @@ function MbtiResult(props) {
                         />
                         공유하기
                       </Button>
+                      <Button
+                        style={{
+                          fontFamily: "KCCChassam",
+                          borderRadius: 10,
+                          marginRight: 15,
+                          background: "#D3CEDF",
+                        }}
+                      >
+                        <Link to="/crud/select/my_result">
+                          내가 선택한 답변 보기
+                        </Link>
+                      </Button>
                     </div>
                   </>
                 );
@@ -131,7 +143,6 @@ function MbtiResult(props) {
         <>
           {infoList &&
             infoList.map((item) => {
-              console.log("item", item);
               if (String(item.data_idx) === id) {
                 return (
                   <>

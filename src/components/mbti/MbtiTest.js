@@ -3,9 +3,13 @@ import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import MbtiMain from "./MbtiMain";
 import MbtiSelect from "./MbtiSelect";
 import MbtiResult from "./MbtiResult";
+import CommentCompo from "./CommentCompo";
+import CommentRe from "./CommentRe";
+import MyResult from "./MyResult";
 
 function MbtiTest() {
   const [answerSheet, setAnserSheet] = useState();
+  const [selectedVal, setSelectedVal] = useState([]);
 
   return (
     <>
@@ -18,7 +22,9 @@ function MbtiTest() {
             element={
               <MbtiSelect
                 answerSheet={answerSheet}
+                selectedVal={selectedVal}
                 setAnserSheet={setAnserSheet}
+                setSelectedVal={setSelectedVal}
               />
             }
           />
@@ -26,6 +32,11 @@ function MbtiTest() {
             path="/crud/select/:id"
             element={<MbtiResult answerSheet={answerSheet} />}
           />
+          <Route
+            path="/crud/select/my_result"
+            element={<MyResult selectedVal={selectedVal} />}
+          />
+          <Route path="/crud/comment" element={<CommentRe />} />
         </Routes>
       </BrowserRouter>
     </>

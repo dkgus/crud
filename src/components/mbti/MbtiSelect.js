@@ -6,7 +6,7 @@ import "./style.css";
 
 function MbtiSelect(props) {
   let select = [];
-  const { answerSheet, setAnserSheet } = props;
+  const { answerSheet, selectedVal, setAnserSheet, setSelectedVal } = props;
   const [pageCounter, setPageCounter] = useState(0);
   const [isLast, setLast] = useState(false);
 
@@ -34,8 +34,8 @@ function MbtiSelect(props) {
   console.log("countryNum", countryNum);
 
   useEffect(() => {
-    console.log("locationSelect ", location);
-  }, [location]);
+    console.log("selectedVal ", selectedVal);
+  }, [selectedVal]);
 
   useEffect(() => {
     console.log("answerSheet", answerSheet);
@@ -46,8 +46,10 @@ function MbtiSelect(props) {
   }, [pageCounter, endPoint]);
 
   const onSelect = (e, arr, idx) => {
+    let copy = [...selectedVal];
     arr.a.forEach((item) => {
       if (item.answer === e.target.value) {
+        copy.push({ [idx]: item.answer });
         item.type.forEach((elem) => {
           for (let i = 0; i < pointArr.length; i++) {
             if (pointArr[i].name === elem) {
@@ -65,6 +67,7 @@ function MbtiSelect(props) {
         });
       }
     });
+    setSelectedVal(copy);
 
     console.log("pointArr1", pointArr);
     const maxObjArr = pointArr.reduce((prev, value) => {
