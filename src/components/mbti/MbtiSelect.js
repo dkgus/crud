@@ -3,6 +3,7 @@ import { qnaList, pointArr } from "./mbtiData";
 import { Button, Radio } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import "./style.css";
+import "antd/dist/antd.css";
 
 function MbtiSelect(props) {
   let select = [];
@@ -31,25 +32,19 @@ function MbtiSelect(props) {
     스위스: 13,
   };
   let countryNum = answerSheet && countryType[answerSheet];
-  console.log("countryNum", countryNum);
 
-  useEffect(() => {
-    console.log("selectedVal ", selectedVal);
-  }, [selectedVal]);
+  useEffect(() => {}, [selectedVal]);
 
   useEffect(() => {
     console.log("answerSheet", answerSheet);
   }, [answerSheet]);
-  useEffect(() => {
-    console.log("pageCounter", pageCounter);
-    console.log("endPoint", endPoint);
-  }, [pageCounter, endPoint]);
+  useEffect(() => {}, [pageCounter, endPoint]);
 
   const onSelect = (e, arr, idx) => {
     let copy = [...selectedVal];
     arr.a.forEach((item) => {
       if (item.answer === e.target.value) {
-        copy.push({ [idx]: item.answer });
+        copy.push({ selectAnswer: item.answer });
         item.type.forEach((elem) => {
           for (let i = 0; i < pointArr.length; i++) {
             if (pointArr[i].name === elem) {

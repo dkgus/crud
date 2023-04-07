@@ -3,8 +3,6 @@ import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import MbtiMain from "./MbtiMain";
 import MbtiSelect from "./MbtiSelect";
 import MbtiResult from "./MbtiResult";
-import CommentCompo from "./CommentCompo";
-import CommentRe from "./CommentRe";
 import MyResult from "./MyResult";
 
 function MbtiTest() {
@@ -36,7 +34,6 @@ function MbtiTest() {
             path="/crud/select/my_result"
             element={<MyResult selectedVal={selectedVal} />}
           />
-          <Route path="/crud/comment" element={<CommentRe />} />
         </Routes>
       </BrowserRouter>
     </>

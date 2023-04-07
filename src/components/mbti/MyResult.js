@@ -5,8 +5,18 @@ import { qnaList } from "./mbtiData";
 
 function MyResult(props) {
   const { selectedVal } = props;
-  console.log("selectedVal", selectedVal);
+
   let allAnswer = [];
+
+  qnaList.forEach((item) => {
+    item.a.forEach((elem) => {
+      for (let i = 0; i < selectedVal.length; i++) {
+        if (selectedVal[i].selectAnswer === elem.answer) {
+          allAnswer.push({ ...item, ...elem });
+        }
+      }
+    });
+  });
 
   if (selectedVal.length > 0) {
     return (
@@ -16,59 +26,31 @@ function MyResult(props) {
             background: "#F2D7D9",
             margin: "0 auto",
             width: "80%",
-            height: "1000px",
+            height: "1100px",
             fontFamily: "KCCChassam",
+            paddingTop: 30,
           }}
         >
-          {qnaList.map((item, idx) => {
-            item.a.forEach((elem, idx2) => {
-              let one = [idx + "_" + elem.answer];
-              allAnswer.push(...one);
-            });
-            console.log("allAnswer", allAnswer);
-
-            return (
-              <>
-                <div style={{ paddingBottom: 20 }}>
-                  {item.q}
-                  {allAnswer &&
-                    allAnswer.map((elem2) => {
-                      let one = elem2.charAt(0);
-
-                      if (Number(one) === idx) {
-                        for (let i = 0; i < selectedVal.length; i++) {
-                          let two = [
-                            [idx] + "_" + Object.values(selectedVal[i]),
-                          ];
-
-                          if (two[0] === elem2) {
-                            return (
-                              <>
-                                <div
-                                  style={{
-                                    fontSize: "13px",
-                                    display: "inline-block",
-                                    background: "powderblue",
-                                  }}
-                                >
-                                  {elem2}
-                                </div>
-                              </>
-                            );
-                          } else {
-                            return (
-                              <>
-                                <div style={{ fontSize: "13px" }}>{elem2}</div>
-                              </>
-                            );
-                          }
-                        }
-                      }
-                    })}
-                </div>
-              </>
-            );
-          })}
+          <h3>내가 선택한 답변</h3>
+          {allAnswer &&
+            allAnswer.map((item, idx) => {
+              return (
+                <>
+                  <div style={{ paddingBottom: 20, paddingTop: 30 }}>
+                    <div style={{ paddingBottom: 5 }}>{item.q}</div>
+                    <div
+                      style={{
+                        display: "inline-block",
+                        background: "#D3CEDF",
+                        borderRadius: 10,
+                      }}
+                    >
+                      {item.answer}
+                    </div>
+                  </div>
+                </>
+              );
+            })}
         </div>
 
         <div
@@ -95,7 +77,28 @@ function MyResult(props) {
   } else {
     return (
       <>
-        <div>진행된 평가가 없습니다 평가를 먼저 진행해주세요</div>
+        <div
+          style={{
+            fontFamily: "KCCChassam",
+            background: "#F2D7D9",
+            height: "800px",
+            paddingTop: 150,
+            margin: "0 auto",
+            width: "80%",
+          }}
+        >
+          <div>진행된 평가가 없습니다 평가를 먼저 진행해주세요</div>
+          <Button
+            style={{
+              marginTop: 30,
+              borderRadius: 10,
+              marginRight: 15,
+              background: "#D3CEDF",
+            }}
+          >
+            <Link to="/">테스트 다시하기</Link>
+          </Button>
+        </div>
       </>
     );
   }

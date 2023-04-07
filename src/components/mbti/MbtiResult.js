@@ -100,8 +100,9 @@ function MbtiResult(props) {
                         style={{
                           fontFamily: "KCCChassam",
                           borderRadius: 10,
-                          marginRight: 15,
+                          marginRight: 5,
                           background: "#D3CEDF",
+                          fontSize: "0.5rem",
                         }}
                       >
                         <Link to="/">테스트 다시하기</Link>
@@ -112,21 +113,23 @@ function MbtiResult(props) {
                         style={{
                           fontFamily: "KCCChassam",
                           borderRadius: 10,
+                          fontSize: "0.5rem",
                         }}
                       >
                         <img
                           src={`${process.env.PUBLIC_URL}/asset/KakaoLogo2.png`}
                           alt={"Kakao Logo"}
-                          style={{ width: 30, paddingRight: 10 }}
+                          style={{ width: 30, paddingRight: 5 }}
                         />
-                        공유하기
+                        공유
                       </Button>
                       <Button
                         style={{
                           fontFamily: "KCCChassam",
                           borderRadius: 10,
-                          marginRight: 15,
                           background: "#D3CEDF",
+                          fontSize: "0.5rem",
+                          marginLeft: 5,
                         }}
                       >
                         <Link to="/crud/select/my_result">
