@@ -8,11 +8,12 @@ import "antd/dist/antd.css";
 function MbtiSelect(props) {
   let select = [];
   const { answerSheet, selectedVal, setAnserSheet, setSelectedVal } = props;
+
   const [pageCounter, setPageCounter] = useState(0);
   const [isLast, setLast] = useState(false);
 
   const endPoint = qnaList.length;
-  const location = useLocation();
+  //const location = useLocation();
 
   const countryType = {
     태국: 0,
@@ -36,12 +37,16 @@ function MbtiSelect(props) {
   useEffect(() => {}, [selectedVal]);
 
   useEffect(() => {
-    console.log("answerSheet", answerSheet);
+    //console.log("answerSheet", answerSheet);
   }, [answerSheet]);
   useEffect(() => {}, [pageCounter, endPoint]);
 
+  useEffect(() => {}, []);
+
   const onSelect = (e, arr, idx) => {
     let copy = [...selectedVal];
+    console.log("copy", copy);
+
     arr.a.forEach((item) => {
       if (item.answer === e.target.value) {
         copy.push({ selectAnswer: item.answer });
@@ -64,7 +69,7 @@ function MbtiSelect(props) {
     });
     setSelectedVal(copy);
 
-    console.log("pointArr1", pointArr);
+    //console.log("pointArr1", pointArr);
     const maxObjArr = pointArr.reduce((prev, value) => {
       return prev.value >= value.value ? prev : value;
     });

@@ -7,21 +7,20 @@ import { Link, useParams } from "react-router-dom";
 
 function MbtiResult(props) {
   const { id } = useParams();
-  const { answerSheet } = props;
+  const { answerSheet, setRetest, reTest, setAnserSheet, setSelectedVal } =
+    props;
   const [testPass, setTestPass] = useState(false);
 
   useEffect(() => {
-    console.log("answerSheet", answerSheet);
+    //console.log("answerSheet", answerSheet);
     if (answerSheet === undefined) {
-      console.log("135개별페이지");
       setTestPass(false);
-      console.log("params", id);
     } else {
-      console.log("135테스트후 페이지");
       setTestPass(true);
-      console.log("params", id);
     }
   }, [answerSheet]);
+
+  useEffect(() => {}, [reTest]);
 
   const countryType = {
     태국: 0,
@@ -42,6 +41,13 @@ function MbtiResult(props) {
   };
   let countryNum = countryType[answerSheet];
   let imgNum = "";
+
+  const onClick = () => {
+    setRetest(true);
+    setAnserSheet();
+    setSelectedVal([]);
+  };
+
   return (
     <>
       {testPass ? (
@@ -104,6 +110,7 @@ function MbtiResult(props) {
                           background: "#D3CEDF",
                           fontSize: "0.5rem",
                         }}
+                        onClick={() => onClick()}
                       >
                         <Link to="/">테스트 다시하기</Link>
                       </Button>
@@ -200,6 +207,7 @@ function MbtiResult(props) {
                             marginRight: 15,
                             background: "#D3CEDF",
                           }}
+                          onClick={() => onClick()}
                         >
                           <Link to="/">테스트 다시하기</Link>
                         </Button>

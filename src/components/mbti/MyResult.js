@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { qnaList } from "./mbtiData";
 
 function MyResult(props) {
-  const { selectedVal } = props;
+  const { selectedVal, setRetest, reTest, setAnserSheet, setSelectedVal } =
+    props;
 
   let allAnswer = [];
-
   qnaList.forEach((item) => {
     item.a.forEach((elem) => {
       for (let i = 0; i < selectedVal.length; i++) {
@@ -17,6 +17,12 @@ function MyResult(props) {
       }
     });
   });
+  useEffect(() => {}, [reTest]);
+  const onClick = () => {
+    setRetest(true);
+    setAnserSheet();
+    setSelectedVal([]);
+  };
 
   if (selectedVal.length > 0) {
     return (
@@ -68,6 +74,7 @@ function MyResult(props) {
               marginRight: 15,
               background: "#D3CEDF",
             }}
+            onClick={() => onClick()}
           >
             <Link to="/">테스트 다시하기</Link>
           </Button>

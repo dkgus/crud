@@ -2,13 +2,7 @@ import React, { useEffect } from "react";
 import { Button } from "antd";
 import { Link, useLocation } from "react-router-dom";
 import "./style.css";
-function MbtiMain() {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.log("locationMain ", location);
-  }, [location]);
-
+function MbtiMain(props) {
   return (
     <div
       style={{

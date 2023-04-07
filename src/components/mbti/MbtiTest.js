@@ -8,6 +8,7 @@ import MyResult from "./MyResult";
 function MbtiTest() {
   const [answerSheet, setAnserSheet] = useState();
   const [selectedVal, setSelectedVal] = useState([]);
+  const [reTest, setRetest] = useState(false);
 
   return (
     <>
@@ -23,12 +24,22 @@ function MbtiTest() {
                 selectedVal={selectedVal}
                 setAnserSheet={setAnserSheet}
                 setSelectedVal={setSelectedVal}
+                setRetest={setRetest}
+                reTest={reTest}
               />
             }
           />
           <Route
             path="/crud/select/:id"
-            element={<MbtiResult answerSheet={answerSheet} />}
+            element={
+              <MbtiResult
+                answerSheet={answerSheet}
+                setRetest={setRetest}
+                reTest={reTest}
+                setAnserSheet={setAnserSheet}
+                setSelectedVal={setSelectedVal}
+              />
+            }
           />
           <Route
             path="/crud/select/my_result"
