@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MbtiMain from "./MbtiMain";
 import MbtiSelect from "./MbtiSelect";
 import MbtiResult from "./MbtiResult";
@@ -43,7 +43,14 @@ function MbtiTest() {
           />
           <Route
             path="/crud/select/my_result"
-            element={<MyResult selectedVal={selectedVal} />}
+            element={
+              <MyResult
+                selectedVal={selectedVal}
+                setAnserSheet={setAnserSheet}
+                setSelectedVal={setSelectedVal}
+                setRetest={setRetest}
+              />
+            }
           />
         </Routes>
       </BrowserRouter>

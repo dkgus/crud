@@ -12,7 +12,6 @@ function MbtiResult(props) {
   const [testPass, setTestPass] = useState(false);
 
   useEffect(() => {
-    //console.log("answerSheet", answerSheet);
     if (answerSheet === undefined) {
       setTestPass(false);
     } else {
@@ -211,7 +210,7 @@ function MbtiResult(props) {
                         >
                           <Link to="/">테스트 다시하기</Link>
                         </Button>
-                        <Button
+                        {/* <Button
                           onClick={() => shareKakao(infoList, countryNum)}
                           id="kakaotalk-sharing-btn"
                           style={{
@@ -225,7 +224,7 @@ function MbtiResult(props) {
                             style={{ width: 30, paddingRight: 10 }}
                           />
                           공유하기
-                        </Button>
+                        </Button> */}
                       </div>
                     </>
                   </>

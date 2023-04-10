@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { qnaList, pointArr } from "./mbtiData";
 import { Button, Radio } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./style.css";
 import "antd/dist/antd.css";
 
@@ -13,11 +13,10 @@ function MbtiSelect(props) {
   const [isLast, setLast] = useState(false);
 
   const endPoint = qnaList.length;
-  //const location = useLocation();
 
   const countryType = {
     태국: 0,
-    "영국 런던": "1",
+    "영국 런던": 1,
     "미국 뉴욕": 2,
     "캐나다 나이아가라 폭포": 3,
     "프랑스 파리": 4,
@@ -30,22 +29,19 @@ function MbtiSelect(props) {
     싱가폴: 11,
     "이집트 사막": 12,
     "미국 캘리포니아": 13,
-    스위스: 13,
+    스위스: 14,
   };
   let countryNum = answerSheet && countryType[answerSheet];
 
   useEffect(() => {}, [selectedVal]);
 
-  useEffect(() => {
-    //console.log("answerSheet", answerSheet);
-  }, [answerSheet]);
+  useEffect(() => {}, [answerSheet]);
   useEffect(() => {}, [pageCounter, endPoint]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {}, [isLast]);
 
   const onSelect = (e, arr, idx) => {
     let copy = [...selectedVal];
-    console.log("copy", copy);
 
     arr.a.forEach((item) => {
       if (item.answer === e.target.value) {
@@ -141,6 +137,7 @@ function MbtiSelect(props) {
                             }}
                             value={item.answer}
                             onChange={(e) => onSelect(e, qnaList[idx], idx)}
+                            disabled={isLast ? true : false}
                           >
                             {item.answer}
                           </Radio.Button>

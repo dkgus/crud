@@ -11,7 +11,6 @@ export const shareKakao = (infoList, countryNum) => {
     const kakao = window.Kakao;
     if (!kakao.isInitialized()) {
       kakao.init(process.env.REACT_APP_KAKAO_KEY);
-      //kakao.init("586319c3b15435c5ee53d0f823bf910d");
     }
 
     kakao.Share.createDefaultButton({
